@@ -59,3 +59,18 @@ body {
     width: 10px;
     background-color: blueviolet;
 }
+
+#enemy-cont {
+    position: absolute;
+    top: 12.5%;
+    left: 50%;
+    transform: translate(-50%);
+    width: 78%;
+    z-index: 1338;
+}
+
+.enemy {
+    height: 50px;
+    width: 50px;
+    margin: 0.85rem;
+}

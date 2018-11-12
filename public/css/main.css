@@ -1,8 +1,8 @@
+@import url('https://fonts.googleapis.com/css?family=Londrina+Solid|Orbitron:400,700');
 
 body {
     overflow: hidden;
 }
-
 
 #game-window {
     background: linear-gradient(
@@ -43,24 +43,25 @@ body {
 #score-cont {
     position: absolute;
     right: 4.5%;
-    top: 2.5%;
+    top: 4%;
 }
 
 #level-cont {
     position: absolute;
-    right: 22.5%;
-    top: 2.5%;
+    right: 23.5%;
+    top: 4%;
 }
 
 #stats-cont {
     position: absolute;
-    right: 37.5%;
-    top: 2.5%;
+    right: 36%;
+    top: 4%;
 }
 
 #score, #level, #stats {
     color: #ffffff;
     margin: 0;
+    font-family: 'Londrina Solid', cursive;
 }
 
 .bullet {
@@ -75,10 +76,6 @@ body {
     animation: spin 0.5s infinite linear;
 }
 
-@keyframes spin {
-    from {transform:rotate(0deg);}
-    to {transform:rotate(360deg);}
-}
 
 #enemy-cont {
     position: absolute;
@@ -96,6 +93,10 @@ body {
     transition: 0.3s ease-in-out;
 }
 
+.spawned-enemy {
+    animation: move 3s infinite linear;
+}
+
 .explosion {
     position: absolute;
     z-index: 1339;
@@ -104,10 +105,34 @@ body {
 #announcement {
     position: absolute;
     top: 35%;
-    font-size: 60px;
+    font-size: 50px;
     width: 100%;
     text-align: center;
-    letter-spacing: 5px;
+    letter-spacing: 10px;
     color: white;
     display: none;
+    font-weight: 800;
+    text-transform: uppercase;
+    font-family: 'Orbitron', sans-serif;
+}
+
+@keyframes spin {
+    from {transform:rotate(0deg);}
+    to {transform:rotate(360deg);}
+}
+
+@keyframes move {
+    0% {transform:rotate(0deg);}
+    25% {transform:rotate(20deg);}
+    50% {transform:rotate(0deg);}
+    75% {transform:rotate(-20deg);}
+    100% {transform:rotate(0deg);}
+}
+
+@keyframes moveEnemies {
+    0% {left: 0}
+    25% {transform:rotate(20deg);}
+    50% {transform:rotate(0deg);}
+    75% {transform:rotate(-20deg);}
+    100% {transform:rotate(0deg);}
 }

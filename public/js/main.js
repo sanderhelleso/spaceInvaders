@@ -129,6 +129,9 @@ function createEnemy(enemyIndex) {
     const enemy = document.createElement('img');
     enemy.src = '../public/assets/sprites/invader.png';    
     enemy.className = 'enemy animated zoomInUp';
+    setTimeout(() => {
+        enemy.className = 'enemy spawned-enemy';
+    }, 1000);
     
     enemyCont.appendChild(enemy);
 }

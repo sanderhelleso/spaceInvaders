@@ -6,12 +6,35 @@ body {
 
 #game-window {
     background: linear-gradient(
-    rgba(0, 0, 0, 0.7), 
-    rgba(0, 0, 0, 0.7)),
+    rgba(0, 0, 0, 0.8), 
+    rgba(0, 0, 0, 0.8)),
     url("../assets/ui/bg.jpg");
     background-repeat: no-repeat;
     height: 600px;
     width: 600px;
     position: relative;
     margin: 15vh auto;
+}
+
+#life {
+    position: absolute;
+    left: 2.5%;
+    top: 2.5%;
+}
+
+.life {
+    height: 40px;
+    width: 40px;
+}
+
+#player-cont {
+    position: absolute;
+    bottom: 15%;
+    animation: 0.3s transform;
+}
+
+#player {
+    height: 70px;
+    width: 70px;
+    transform: rotate(180deg);
 }

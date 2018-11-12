@@ -2,6 +2,13 @@
 
 body {
     overflow: hidden;
+    background: linear-gradient(
+    rgba(100, 47, 153, 0.8), 
+    rgba(115, 56, 182, 0.8)),
+    url("../assets/ui/arcade.jpg");
+    background-size: cover;
+	background-repeat: no-repeat;
+    background-attachment: fixed;
 }
 
 #game-window {
@@ -14,6 +21,9 @@ body {
     width: 600px;
     position: relative;
     margin: 15vh auto;
+    -webkit-box-shadow: 0 24px 38px 3px rgba(0,0,0,0.14), 0 9px 46px 8px rgba(0,0,0,0.12), 0 11px 15px -7px rgba(0,0,0,0.2);
+    box-shadow: 0 24px 38px 3px rgba(0,0,0,0.14), 0 9px 46px 8px rgba(0,0,0,0.12), 0 11px 15px -7px rgba(0,0,0,0.2);
+    border-radius: 12px;
 }
 
 #life {
@@ -68,12 +78,55 @@ body {
     position: absolute;
     border-radius: 50%;
     bottom: 20%;
-    height: 12.5px;
-    width: 12.5px;
+    animation: spin 0.5s infinite linear;
+}
+
+.bullet1 {
+    background: #11998e;  /* fallback for old browsers */
+    background: -webkit-linear-gradient(to right, #38ef7d, #11998e);  /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to right, #38ef7d, #11998e); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    height: 12px;
+    width: 12px;
+    
+}
+
+.bullet2 {
+    background: #F2994A;  /* fallback for old browsers */
+    background: -webkit-linear-gradient(to right, #F2C94C, #F2994A);  /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to right, #F2C94C, #F2994A); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    height: 12px;
+    width: 12px;
+    
+}
+
+.bullet3 {
     background: #c31432;  /* fallback for old browsers */
     background: -webkit-linear-gradient(to left, #240b36, #c31432);  /* Chrome 10-25, Safari 5.1-6 */
     background: linear-gradient(to left, #240b36, #c31432); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-    animation: spin 0.5s infinite linear;
+    height: 12px;
+    width: 12px;
+}
+
+.bullet4 {
+    background: #833ab4;  /* fallback for old browsers */
+    background: -webkit-linear-gradient(to right, #fcb045, #fd1d1d, #833ab4);  /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to right, #fcb045, #fd1d1d, #833ab4); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    height: 12px;
+    width: 12px;
+    
+}
+
+.bullet5 {
+    background: #7F7FD5;  /* fallback for old browsers */
+    background: -webkit-linear-gradient(to right, #91EAE4, #86A8E7, #7F7FD5);  /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to right, #91EAE4, #86A8E7, #7F7FD5); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */   
+    height: 12px;
+    width: 12px; 
+}
+
+.mega {
+    height: 20px !important;
+    width: 20px !important;
 }
 
 
@@ -103,7 +156,7 @@ body {
     z-index: 1339;
 }
 
-#announcement {
+#announcement, #mega-ready {
     position: absolute;
     top: 35%;
     font-size: 50px;
@@ -115,6 +168,11 @@ body {
     font-weight: 800;
     text-transform: uppercase;
     font-family: 'Orbitron', sans-serif;
+}
+
+#mega-ready {
+    font-size: 25px;
+    color: #833ab4;
 }
 
 @keyframes spin {

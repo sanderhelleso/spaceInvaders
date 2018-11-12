@@ -1,21 +1,22 @@
 window.onload = startGame;
 
 // GLOBALS
-let gameWindow;         // main game window
-let enemyCont;          // enemy container
-let enemyPosY = 12;     // enemies position y
-let enemyPosX = 50      // enemies position X
-let moving = false;     // check if enemies are moving
-let moveVal;            // enemy movement interval
-let enemies = 0;        // enemies current level
-let enemiesKilled;      // enemies killed current level
-let player;             // player sprite
-let score = 0;          // total accumulated score
-let bgPosY = 0;         // background Y position
-let posX = 50;          // player x position
-let level = 0           // current game level
-let dead = false;       // player lost round
-let lifes = 3;          // users total lifes
+let gameWindow;             // main game window
+let enemyCont;              // enemy container
+let enemyPosY = 12;         // enemies position y
+let enemyPosX = 50          // enemies position X
+let moving = false;         // check if enemies are moving
+let moveVal;                // enemy movement interval
+let enemies = 0;            // enemies current level
+let enemiesKilled;          // enemies killed current level
+let player;                 // player sprite
+let score = 0;              // total accumulated score
+let bgPosY = 0;             // background Y position
+let posX = 50;              // player x position
+let level = 0               // current game level
+let dead = false;           // player lost round
+let lifes = 3;              // users total lifes
+let megaAvailable = false;  // mega combo
 
 function startGame() {
     initPlayer();
@@ -35,6 +36,11 @@ function gameLoop() {
 function updateScore() {
     score += 5;
     document.querySelector('#score').innerHTML = `Score: ${score}`;
+    if (score >= 3000 && score % 1000 === 0) {
+        console.log('MEGA READY');
+        showMegaCombo();
+        megaAvailable = true;
+    }
 }
 
 
@@ -74,6 +80,12 @@ function initPlayer() {
                 moveRight();
             }
         }
+
+        // mega shoot (combo)
+        else if (e.keyCode === 67 && megaAvailable) {
+            mega();
+            megaAvailable = false;
+        }
     });
 
     document.body.addEventListener('keyup', () => {
@@ -81,11 +93,25 @@ function initPlayer() {
     });
 }
 
-function shoot() {
+function mega() {
+    for (let i = 0; i < 20; i++) {
+        shoot(i);
+    }
+}
+
+function shoot(megaPos) {
     let bulletPosY = 20;
     const bullet = document.createElement('div');
-    bullet.className = 'bullet animated pulse';
-    bullet.style.left = `${posX + 5}%`;
+    if (megaPos) {
+        bullet.className = `bullet animated pulse mega bullet${Math.floor(Math.random() * 5) + 1}`;
+        bullet.style.left = `${megaPos * 5}%`;
+    }
+
+    else {
+        bullet.className = `bullet animated pulse bullet${Math.floor(Math.random() * 5) + 1}`;
+        bullet.style.left = `${(posX + 5)}%`;
+    }
+
     gameWindow.appendChild(bullet);
 
     const moveBullet = setInterval(() => {
@@ -157,31 +183,9 @@ function createEnemy(enemyIndex) {
     enemy.className = 'enemy animated zoomInUp';
     setTimeout(() => {
         enemy.className = 'enemy spawned-enemy';
-        //enemyFire(enemy);
     }, 1000);
     
     enemyCont.appendChild(enemy);
-}
-
-function enemyFire(enemy) {
-    const moveBullet = setInterval(() => {
-
-        const enemyPos = enemy.getBoundingClientRect();
-        const bullet = document.createElement('div');
-        bullet.className = 'bullet animated pulse';
-        bullet.style.left = `${enemyPos.left}px`;
-        bullet.style.bottom = `${enemyPos.bottom}px`;
-        gameWindow.appendChild(bullet);
-
-        setInterval(() => {
-            bullet.style.bottom = `${enemyPos.bottom - 5}px`;
-            bullet.style.top = `${enemyPos.top - 5}px`;
-        }, 75);
-
-        if (enemy.style.opacity === '0') {
-            clearInterval(moveBullet);
-        }
-    }, 1000);
 }
 
 function hitEnemy(bulletPos) {
@@ -203,9 +207,7 @@ function hitPlayer() {
             if (enemy.style.opacity !== '0') {
                 console.log('DEAD');
                 dead = true;
-                if (!removeLife()) {
-                    updateStats();
-                }
+                removeLife();
             }
         }
     });
@@ -213,20 +215,19 @@ function hitPlayer() {
 
 function removeLife() {
     lifes--;
-    score -= 500;
+    score -= 1000;
 
-    Array.from(document.querySelectorAll('.life')).reverse()[0].className = 'life animated bounceOut';
-
+    console.log(lifes);
     if (lifes === 0) {
         gameOver();
-        return true;
+        return;
     }
 
+    Array.from(document.querySelectorAll('.life')).reverse()[0].className = 'life animated bounceOut';
     setTimeout(() => {
         document.querySelector('#life').removeChild(Array.from(document.querySelectorAll('.life')).reverse()[0]);
     }, 1000);
-
-    return false;
+    updateStats();
 }
 
 function gameOver() {
@@ -265,6 +266,18 @@ function showLevelAnnouncement() {
             announcement.style.display = 'none';
         }, 1000);
     }, 1000);
+}
+
+function showMegaCombo() {
+    const announcement = document.querySelector('#mega-ready');
+    announcement.className = 'animated fadeInUp';
+    announcement.style.display = 'block';
+    setTimeout(() => {
+        announcement.className = 'animated fadeOutUp';
+        setTimeout(() => {
+            announcement.style.display = 'none';
+        }, 500);
+    }, 500);
 }
 
 function removeEnemy(enemy) {

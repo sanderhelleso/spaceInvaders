@@ -38,3 +38,14 @@ body {
     width: 70px;
     transform: rotate(180deg);
 }
+
+#score-cont {
+    position: absolute;
+    right: 3.5%;
+    top: 2.5%;
+}
+
+#score {
+    color: #ffffff;
+    margin: 0;
+}

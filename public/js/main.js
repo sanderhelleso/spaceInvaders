@@ -1,5 +1,10 @@
 window.onload = startApp;
 
+// GLOBALS
+let player;
+let score = 0;
+let bgPosY = 0;
+let posX = 50;
 
 function startApp() {
     initPlayer();
@@ -8,13 +13,18 @@ function startApp() {
 
 function gameLoop() {
     setInterval(() => {
+        updateScore();
         moveBg();
     }, 100);
 }
 
+function updateScore() {
+    score += 5;
+    document.querySelector('#score').innerHTML = `Score: ${score}`;
+}
+
 
 // animate game background
-let bgPosY = 0;
 function moveBg() {
     const bg = document.querySelector('#game-window');
     bg.style.backgroundPosition = `100% ${bgPosY}%`;
@@ -26,8 +36,6 @@ function moveBg() {
     bgPosY += 10;
 }
 
-let player;
-let posX = 50;
 function initPlayer() {
     player = document.querySelector('#player-cont');
     player.style.left = `${posX}%`;

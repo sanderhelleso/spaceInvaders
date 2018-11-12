@@ -1,15 +1,21 @@
 window.onload = startGame;
 
 // GLOBALS
-let gameWindow;     // main game window
-let enemyCont;      // enemy container
-let enemies = 0;    // enemies current level
-let enemiesKilled;  // enemies killed current level
-let player;         // player sprite
-let score = 0;      // total accumulated score
-let bgPosY = 0;     // background Y position
-let posX = 50;      // player x position
-let level = 0       // current game level
+let gameWindow;         // main game window
+let enemyCont;          // enemy container
+let enemyPosY = 12;     // enemies position y
+let enemyPosX = 50      // enemies position X
+let moving = false;     // check if enemies are moving
+let moveVal;            // enemy movement interval
+let enemies = 0;        // enemies current level
+let enemiesKilled;      // enemies killed current level
+let player;             // player sprite
+let score = 0;          // total accumulated score
+let bgPosY = 0;         // background Y position
+let posX = 50;          // player x position
+let level = 0           // current game level
+let dead = false;       // player lost round
+let lifes = 3;          // users total lifes
 
 function startGame() {
     initPlayer();
@@ -118,11 +124,31 @@ function startLevel() {
     enemyCont = document.querySelector('#enemy-cont');
     
     // render enemies
-    for(let i = 0; i < enemies; i++) {
+    for (let i = 0; i < enemies; i++) {
         setTimeout(() => {
             createEnemy(i);
         }, i * 100);
     } 
+
+    moveEnemies();
+}
+
+function moveEnemies() {
+    moveVal = setInterval(() => {
+        enemyPosY += 4;
+        if (moving) {
+            enemyPosX += 4;
+            moving = false;
+        }
+
+        else {
+            enemyPosX -= 4;
+            moving = true;
+        }
+        enemyCont.style.top = `${enemyPosY}%`;
+        enemyCont.style.left = `${enemyPosX}%`;
+        hitPlayer();
+    }, 2000);
 }
 
 function createEnemy(enemyIndex) {
@@ -131,9 +157,31 @@ function createEnemy(enemyIndex) {
     enemy.className = 'enemy animated zoomInUp';
     setTimeout(() => {
         enemy.className = 'enemy spawned-enemy';
+        //enemyFire(enemy);
     }, 1000);
     
     enemyCont.appendChild(enemy);
+}
+
+function enemyFire(enemy) {
+    const moveBullet = setInterval(() => {
+
+        const enemyPos = enemy.getBoundingClientRect();
+        const bullet = document.createElement('div');
+        bullet.className = 'bullet animated pulse';
+        bullet.style.left = `${enemyPos.left}px`;
+        bullet.style.bottom = `${enemyPos.bottom}px`;
+        gameWindow.appendChild(bullet);
+
+        setInterval(() => {
+            bullet.style.bottom = `${enemyPos.bottom - 5}px`;
+            bullet.style.top = `${enemyPos.top - 5}px`;
+        }, 75);
+
+        if (enemy.style.opacity === '0') {
+            clearInterval(moveBullet);
+        }
+    }, 1000);
 }
 
 function hitEnemy(bulletPos) {
@@ -147,14 +195,58 @@ function hitEnemy(bulletPos) {
     });
 }
 
+function hitPlayer() {
+    const playerPos = player.getBoundingClientRect();
+    Array.from(document.querySelectorAll('.enemy')).forEach((enemy) => {
+        const enemyPos = enemy.getBoundingClientRect();
+        if (playerPos.x >= enemyPos.left && playerPos.x <= enemyPos.right && playerPos.y >= enemyPos.top && playerPos.y <= enemyPos.bottom || enemyPos.bottom + 20 >= gameWindow.getBoundingClientRect().bottom) {
+            if (enemy.style.opacity !== '0') {
+                console.log('DEAD');
+                dead = true;
+                if (!removeLife()) {
+                    updateStats();
+                }
+            }
+        }
+    });
+}
+
+function removeLife() {
+    lifes--;
+    score -= 500;
+
+    Array.from(document.querySelectorAll('.life')).reverse()[0].className = 'life animated bounceOut';
+
+    if (lifes === 0) {
+        gameOver();
+        return true;
+    }
+
+    setTimeout(() => {
+        document.querySelector('#life').removeChild(Array.from(document.querySelectorAll('.life')).reverse()[0]);
+    }, 1000);
+
+    return false;
+}
+
+function gameOver() {
+    console.log('GAME OVER');
+}
+
 function updateStats() {
     document.querySelector('#stats').innerHTML = `Enemies Killed: ${enemiesKilled}/${enemies}`;
 
-    if (enemiesKilled === enemies) {
+    if (enemiesKilled === enemies || dead) {
         Array.from(document.querySelectorAll('.enemy')).forEach((enemy) => {
             enemyCont.removeChild(enemy);
         });
-
+        
+        dead = false;
+        enemyPosY = 12;
+        enemyPosX = 50;
+        enemyCont.style.top = `${enemyPosY}%`;
+        enemyCont.style.left = `${enemyPosX}%`;
+        clearInterval(moveVal);
         showLevelAnnouncement();
         setTimeout(() => {
             startLevel();
@@ -179,22 +271,5 @@ function removeEnemy(enemy) {
     enemy.style.opacity = '0';
     enemiesKilled++;
     score += 100;
-    //explode(enemy);
     updateStats();
-}
-
-function explode(enemy) {
-    const enemyPos = enemy.getBoundingClientRect();
-    const explosion = document.createElement('img');
-    explosion.src = '../public/assets/sprites/explosion.gif';    
-    explosion.className = 'explosion';
-    explosion.style.left = `${enemyPos.left}px`;
-    explosion.style.right = `${enemyPos.right}px`;
-    explosion.style.top = `${enemyPos.top}px`;
-    explosion.style.bottom = `${enemyPos.bottom}px`;
-
-    document.body.appendChild(explosion);
-    setTimeout(() => {
-        document.body.removeChild(explosion);
-    }, 700);
 }

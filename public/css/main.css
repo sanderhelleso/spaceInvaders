@@ -2,16 +2,14 @@
 
 body {
     overflow: hidden;
-    background: linear-gradient(
-    rgba(100, 47, 153, 0.8), 
-    rgba(115, 56, 182, 0.8)),
-    url("../assets/ui/arcade.jpg");
+    animation: animateBg 60s infinite linear;
     background-size: cover;
 	background-repeat: no-repeat;
     background-attachment: fixed;
 }
 
-#game-window {
+#game-window, #menu {
+    display: none;
     background: linear-gradient(
     rgba(0, 0, 0, 0.8), 
     rgba(0, 0, 0, 0.8)),
@@ -25,6 +23,24 @@ body {
     box-shadow: 0 24px 38px 3px rgba(0,0,0,0.14), 0 9px 46px 8px rgba(0,0,0,0.12), 0 11px 15px -7px rgba(0,0,0,0.2);
     border-radius: 12px;
 }
+
+#menu {
+    display: block;
+    text-align: center;
+}
+
+#menu h1 {
+    position: absolute;
+    font-family: 'Orbitron', sans-serif;
+    color: #833ab4;
+    top: 15%;
+    left: 50%;
+    font-size: 50px;
+    transform: translate(-50%);
+    text-shadow: 2px 2px 5px rgb(255, 115, 0);
+    letter-spacing: 5px;
+}
+
 
 #life {
     position: absolute;
@@ -168,11 +184,13 @@ body {
     font-weight: 800;
     text-transform: uppercase;
     font-family: 'Orbitron', sans-serif;
+    text-shadow: 2px 2px 5px rgb(22, 231, 102);
 }
 
 #mega-ready {
     font-size: 25px;
     color: #833ab4;
+    text-shadow: 2px 2px 5px rgb(255, 115, 0);
 }
 
 @keyframes spin {
@@ -188,6 +206,45 @@ body {
     100% {transform:rotate(0deg);}
 }
 
-@keyframes moveEnemies {
-    
+@keyframes animateBg {
+    0% {background: linear-gradient(
+        rgba(100, 47, 153, 0.8), 
+        rgba(115, 56, 182, 0.8)),
+        url("../assets/ui/arcade.jpg");
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+    }
+    25% {background: linear-gradient(
+        rgba(47, 105, 153, 0.8), 
+        rgba(6, 226, 255, 0.8)),
+        url("../assets/ui/arcade.jpg");
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+    }
+    50% {background: linear-gradient(
+        rgba(236, 143, 66, 0.8), 
+        rgba(208, 211, 45, 0.8)),
+        url("../assets/ui/arcade.jpg");
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+    }
+    75% {background: linear-gradient(
+        rgba(255, 46, 46, 0.8), 
+        rgba(235, 85, 85, 0.8)),
+        url("../assets/ui/arcade.jpg");
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+    }
+    100% {background: linear-gradient(
+        rgba(100, 47, 153, 0.8), 
+        rgba(115, 56, 182, 0.8)),
+        url("../assets/ui/arcade.jpg");
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+    }
 }

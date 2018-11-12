@@ -1,7 +1,8 @@
-window.onload = startGame;
+window.onload = initMenu;
 
 // GLOBALS
 let gameWindow;             // main game window
+let gameMenu;               // main game menu
 let enemyCont;              // enemy container
 let enemyPosY = 12;         // enemies position y
 let enemyPosX = 50          // enemies position X
@@ -18,12 +19,23 @@ let dead = false;           // player lost round
 let lifes = 3;              // users total lifes
 let megaAvailable = false;  // mega combo
 
+function initMenu() {
+    document.querySelector('#start-game').addEventListener('click', startGame);
+    gameWindow = document.querySelector('#game-window');
+    gameMenu = document.querySelector('#menu');
+}
+
 function startGame() {
+    gameMenu.style.display = 'none';
+    gameWindow.style.display = 'block';
+
     initPlayer();
     showLevelAnnouncement();
     startLevel();
     gameLoop();
 }
+
+
 
 function gameLoop() {
     setInterval(() => {
@@ -46,7 +58,6 @@ function updateScore() {
 
 // animate game background
 function moveBg() {
-    gameWindow = document.querySelector('#game-window');
     gameWindow.style.backgroundPosition = `100% ${bgPosY}%`;
 
     if (bgPosY >= 100) {
@@ -270,14 +281,14 @@ function showLevelAnnouncement() {
 
 function showMegaCombo() {
     const announcement = document.querySelector('#mega-ready');
-    announcement.className = 'animated fadeInUp';
+    announcement.className = 'animated fadeIn';
     announcement.style.display = 'block';
     setTimeout(() => {
-        announcement.className = 'animated fadeOutUp';
+        announcement.className = 'animated zoomOut';
         setTimeout(() => {
             announcement.style.display = 'none';
-        }, 500);
-    }, 500);
+        }, 750);
+    }, 750);
 }
 
 function removeEnemy(enemy) {

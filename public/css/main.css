@@ -42,11 +42,23 @@ body {
 
 #score-cont {
     position: absolute;
-    right: 3.5%;
+    right: 4.5%;
     top: 2.5%;
 }
 
-#score {
+#level-cont {
+    position: absolute;
+    right: 22.5%;
+    top: 2.5%;
+}
+
+#stats-cont {
+    position: absolute;
+    right: 37.5%;
+    top: 2.5%;
+}
+
+#score, #level, #stats {
     color: #ffffff;
     margin: 0;
 }
@@ -55,9 +67,17 @@ body {
     position: absolute;
     border-radius: 50%;
     bottom: 20%;
-    height: 10px;
-    width: 10px;
-    background-color: blueviolet;
+    height: 12.5px;
+    width: 12.5px;
+    background: #c31432;  /* fallback for old browsers */
+    background: -webkit-linear-gradient(to left, #240b36, #c31432);  /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to left, #240b36, #c31432); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    animation: spin 0.5s infinite linear;
+}
+
+@keyframes spin {
+    from {transform:rotate(0deg);}
+    to {transform:rotate(360deg);}
 }
 
 #enemy-cont {
@@ -73,4 +93,21 @@ body {
     height: 50px;
     width: 50px;
     margin: 0.85rem;
+    transition: 0.3s ease-in-out;
+}
+
+.explosion {
+    position: absolute;
+    z-index: 1339;
+}
+
+#announcement {
+    position: absolute;
+    top: 35%;
+    font-size: 60px;
+    width: 100%;
+    text-align: center;
+    letter-spacing: 5px;
+    color: white;
+    display: none;
 }

@@ -5,11 +5,14 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>Space Invaders</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" media="screen" href="./public/css/animate.css" />
     <link rel="stylesheet" type="text/css" media="screen" href="./public/css/main.css" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="./public/js/main.js"></script>
 </head>
 <body>
-    <div id="game-window">
+    <div id="game-window" class="">
+        <h2 id="announcement" class="animated fadeInUp"></h2>
         <div id="life">
             <img class="life" src="public/assets/ui/life.png" alt="life" />
             <img class="life" src="public/assets/ui/life.png" alt="life" />
@@ -17,6 +20,12 @@
         </div>
         <div id="score-cont">
             <p id="score">Score: </p>
+        </div>
+        <div id="level-cont">
+            <p id="level">Level: </p>
+        </div>
+        <div id="stats-cont">
+            <p id="stats">Enemies Killed: </p>
         </div>
         <div id="player-cont">
             <img id="player" src="public/assets/sprites/spaceship.png" alt="player" />

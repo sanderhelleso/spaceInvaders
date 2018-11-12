@@ -1,12 +1,15 @@
 window.onload = startApp;
 
 // GLOBALS
-let player;
-let score = 0;
-let bgPosY = 0;
-let posX = 50;
+let gameWindow;     // main game window
+let player;         // player sprite
+let score = 0;      // total accumulated score
+let bgPosY = 0;     // background Y position
+let posX = 50;      // player x position
+let level = 1       // current game level
 
 function startApp() {
+
     initPlayer();
     gameLoop();
 }
@@ -18,6 +21,7 @@ function gameLoop() {
     }, 100);
 }
 
+// update score
 function updateScore() {
     score += 5;
     document.querySelector('#score').innerHTML = `Score: ${score}`;
@@ -26,8 +30,8 @@ function updateScore() {
 
 // animate game background
 function moveBg() {
-    const bg = document.querySelector('#game-window');
-    bg.style.backgroundPosition = `100% ${bgPosY}%`;
+    gameWindow = document.querySelector('#game-window');
+    gameWindow.style.backgroundPosition = `100% ${bgPosY}%`;
 
     if (bgPosY >= 100) {
         bgPosY = 0;
@@ -43,8 +47,12 @@ function initPlayer() {
 
     document.body.addEventListener('keydown', (e) => {
 
+        if (e.keyCode === 13 || e.keyCode === 32) {
+            shoot();
+        }
+
         // left
-        if (e.keyCode === 65 || e.keyCode === 37) {
+        else if (e.keyCode === 65 || e.keyCode === 37) {
             if (posX >= 2) {
                 moveLeft();
             }
@@ -62,6 +70,27 @@ function initPlayer() {
     document.body.addEventListener('keyup', () => {
         player.style.transform = 'rotate(0deg)';
     });
+}
+
+function shoot() {
+    let bulletPosY = 20;
+    const bullet = document.createElement('div');
+    bullet.className = 'bullet';
+    bullet.style.left = `${posX + 5}%`;
+    gameWindow.appendChild(bullet);
+
+    const moveBullet = setInterval(() => {
+        if (bulletPosY <= 94) {
+            bulletPosY += 5;
+
+            bullet.style.bottom = `${bulletPosY}%`;
+        }
+
+        else {
+            gameWindow.removeChild(bullet);
+            clearInterval(moveBullet);
+        }
+    }, 75);
 }
 
 function moveLeft() {

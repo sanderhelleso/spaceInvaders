@@ -29,8 +29,9 @@ body {
 
 #player-cont {
     position: absolute;
-    bottom: 15%;
+    bottom: 10%;
     animation: 0.3s transform;
+    z-index: 1337;
 }
 
 #player {
@@ -48,4 +49,13 @@ body {
 #score {
     color: #ffffff;
     margin: 0;
+}
+
+.bullet {
+    position: absolute;
+    border-radius: 50%;
+    bottom: 20%;
+    height: 10px;
+    width: 10px;
+    background-color: blueviolet;
 }

@@ -1,3 +1,17 @@
+
 body {
-    background-color: red;
+    overflow: hidden;
+}
+
+
+#game-window {
+    background: linear-gradient(
+    rgba(0, 0, 0, 0.7), 
+    rgba(0, 0, 0, 0.7)),
+    url("../assets/ui/bg.jpg");
+    background-repeat: no-repeat;
+    height: 600px;
+    width: 600px;
+    position: relative;
+    margin: 15vh auto;
 }

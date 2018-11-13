@@ -4,6 +4,7 @@ window.onload = initMenu;
 let gameWindow;             // main game window
 let gameMenu;               // main game menu
 let gameHighscores;         // main game highscores
+let gameOverScreen;         // main game game over screen
 let enemyCont;              // enemy container
 let enemyPosY = 12;         // enemies position y
 let enemyPosX = 50          // enemies position X
@@ -34,14 +35,22 @@ function reset() {
 function initMenu() {
     document.querySelector('#see-highscores').addEventListener('click', seeHighscores);
     document.querySelector('#back-to-menu').addEventListener('click', backToMenu);
+    document.querySelector('#back-to-menu-game-over').addEventListener('click', backToMenu);
     document.querySelector('#start-game').addEventListener('click', startGame);
     gameWindow = document.querySelector('#game-window');
     gameMenu = document.querySelector('#menu');
     gameHighscores = document.querySelector('#highscores');
+    gameOverScreen = document.querySelector('#game-over');
+}
+
+function gameOverMenu() {
+    gameMenu.style.display = 'none';
+    gameOverScreen.style.display = 'block';
 }
 
 function backToMenu() {
     gameHighscores.style.display = 'none';
+    gameOverScreen.style.display = 'none';
     gameMenu.style.display = 'block';
 }
 
@@ -272,10 +281,9 @@ function removeLife() {
 }
 
 function gameOver() {
-    console.log('GAME OVER');
     clearInterval(loop);
     clearEnemies();
-    seeHighscores();
+    gameOverMenu();
 }
 
 function updateStats() {

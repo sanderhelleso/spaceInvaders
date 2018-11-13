@@ -11,7 +11,24 @@ body {
     background-attachment: fixed;
 }
 
-#game-window, #menu, #highscores {
+#game-over input {
+    letter-spacing: 3px;
+    font-family: 'Orbitron', sans-serif;
+    position: absolute;
+    top: 40%;
+    left: 50%;
+    transform: translate(-50%);
+    font-size: 18px;
+    padding: 1rem 0.25rem;
+    min-width: 60%;
+    background-color: transparent;
+    outline: none;
+    color: #9e9e9e;
+    border: none;
+    border-bottom: 2px solid #38ef7d;
+}
+
+#game-window, #menu, #highscores, #game-over {
     display: none;
     background: linear-gradient(
     rgba(0, 0, 0, 0.8), 
@@ -27,17 +44,13 @@ body {
     border-radius: 12px;
 }
 
-#highscores {
-    overflow-y: auto;
-    color: white;
-}
 
 #menu {
     display: block;
     text-align: center;
 }
 
-#menu h1 {
+#menu h1, #highscores h1, #game-over h1 {
     position: absolute;
     font-family: 'Orbitron', sans-serif;
     color: #833ab4;
@@ -50,7 +63,7 @@ body {
     text-transform: uppercase;
 }
 
-#menu button {
+#menu button, #highscores button, #game-over button {
     font-family: 'Orbitron', sans-serif;
     position: absolute;
     top: 50%;
@@ -65,6 +78,56 @@ body {
     letter-spacing: 3px;
     cursor: pointer;
     text-transform: uppercase;
+}
+
+#game-over .disabled-btn {
+    opacity: 0.1;
+    cursor: not-allowed;
+}
+
+#game-over button {
+    top: 80%;
+}
+
+#highscores {
+    overflow-y: auto;
+    color: white;
+}
+
+#game-over button {
+    color: #ecb621;
+    border: 2px solid #ecb621;
+}
+
+#highscores h1, #game-over h1 {
+    font-size: 40px;
+    margin-top: 0;
+    min-width: 100%;
+    text-align: center;
+}
+
+#highscores button {
+    top: 27.5%;
+    color: #ecb621;
+    border: 2px solid #ecb621;
+    padding: 1rem;
+    min-width: 175px;
+    font-size: 14px;
+}
+
+#highscores ul {
+    position: absolute;
+    top: 42.5%;
+    left: 50%;
+    transform: translate(-50%);
+    list-style: none;
+    padding: 0;
+}
+
+#highscores ul li {
+    margin: 20px 0;
+    font-size: 20px;
+    font-family: 'Londrina Solid', cursive;
 }
 
 #menu #see-highscores {
@@ -230,6 +293,7 @@ body {
     text-transform: uppercase;
     font-family: 'Orbitron', sans-serif;
     text-shadow: 2px 2px 5px rgb(22, 231, 102);
+    z-index: 100000;
 }
 
 #mega-ready {
@@ -244,4 +308,21 @@ body {
     50% {transform:rotate(0deg);}
     75% {transform:rotate(-20deg);}
     100% {transform:rotate(0deg);}
+}
+
+::-webkit-scrollbar {
+    width: 0.5em;
+    border-radius: 12px;
+}
+ 
+::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+    border-radius: 20px;
+}
+ 
+::-webkit-scrollbar-thumb {
+    background: #8E2DE2;  /* fallback for old browsers */
+    background: -webkit-linear-gradient(to bottom, #4A00E0, #8E2DE2);  /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to bottom, #4A00E0, #8E2DE2); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */    
+    border-radius: 12px;
 }

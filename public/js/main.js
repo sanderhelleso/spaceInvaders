@@ -22,6 +22,8 @@ let lifes = 3;              // users total lifes
 let megaAvailable = false;  // mega combo
 let loop;                   // game loop
 let totalEnemiesKilled = 0; // total enemies killed
+let userName;               // username of game
+let saveGame;               // save game button
 
 function reset() {
     score = 0;
@@ -30,17 +32,32 @@ function reset() {
     lifes = 3;
     megaAvailable = false;
     totalEnemiesKilled = 0;
+    userName = '';
 }
 
 function initMenu() {
     document.querySelector('#see-highscores').addEventListener('click', seeHighscores);
     document.querySelector('#back-to-menu').addEventListener('click', backToMenu);
-    document.querySelector('#back-to-menu-game-over').addEventListener('click', backToMenu);
     document.querySelector('#start-game').addEventListener('click', startGame);
+    document.querySelector('input').addEventListener('keyup', (e) => validateName(e));
     gameWindow = document.querySelector('#game-window');
     gameMenu = document.querySelector('#menu');
     gameHighscores = document.querySelector('#highscores');
     gameOverScreen = document.querySelector('#game-over');
+    saveGame = document.querySelector('#back-to-menu-game-over');
+    saveGame.addEventListener('click', seeHighscores);
+}
+
+function validateName(e) {
+    if (e.target.value.length >= 2) {
+        saveGame.disabled = false;
+        saveGame.className = 'enabled-btn';
+    }
+
+    else {
+        saveGame.disabled = true;
+        saveGame.className = 'disabled-btn';
+    }
 }
 
 function gameOverMenu() {
@@ -55,7 +72,21 @@ function backToMenu() {
 }
 
 function seeHighscores() {
+
+    $.getJSON( "../public/highscores/highscores.json", function( data ) {
+        var items = [];
+        $.each( data, function( key, val ) {
+            items.push( "<li id='" + key + "'>" + val + "</li>" );
+        });
+         
+        $( "<ul/>", {
+            "class": "my-new-list",
+            html: items.join( "" )
+        }).appendTo( "#highscores" );
+    });
+
     gameMenu.style.display = 'none';
+    gameOverScreen.style.display = 'none';
     gameHighscores.style.display = 'block';
 }
 
@@ -217,7 +248,7 @@ function moveEnemies() {
         enemyCont.style.top = `${enemyPosY}%`;
         enemyCont.style.left = `${enemyPosX}%`;
         hitPlayer();
-    }, 2000);
+    }, 200);
 }
 
 function createEnemy(enemyIndex) {

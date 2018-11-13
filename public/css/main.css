@@ -81,12 +81,18 @@ body {
 }
 
 #game-over .disabled-btn {
-    opacity: 0.1;
+    opacity: 0.2;
     cursor: not-allowed;
+}
+
+#game-over .enabled-btn {
+    opacity: 1;
+    cursor: pointer;
 }
 
 #game-over button {
     top: 80%;
+    transition: 0.3s ease-in-out;
 }
 
 #highscores {

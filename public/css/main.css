@@ -11,7 +11,7 @@ body {
     background-attachment: fixed;
 }
 
-#game-window, #menu {
+#game-window, #menu, #highscores {
     display: none;
     background: linear-gradient(
     rgba(0, 0, 0, 0.8), 
@@ -27,6 +27,11 @@ body {
     border-radius: 12px;
 }
 
+#highscores {
+    overflow-y: auto;
+    color: white;
+}
+
 #menu {
     display: block;
     text-align: center;
@@ -36,7 +41,7 @@ body {
     position: absolute;
     font-family: 'Orbitron', sans-serif;
     color: #833ab4;
-    top: 15%;
+    top: 10%;
     left: 50%;
     font-size: 50px;
     transform: translate(-50%);
@@ -48,18 +53,24 @@ body {
 #menu button {
     font-family: 'Orbitron', sans-serif;
     position: absolute;
-    top: 55%;
+    top: 50%;
     left: 50%;
     transform: translate(-50%);
     background: transparent;
     border: 2px solid #38ef7d;
+    color: #38ef7d;
     padding: 1rem;
     min-width: 225px;
-    color: #38ef7d;
     font-size: 18px;
     letter-spacing: 3px;
     cursor: pointer;
     text-transform: uppercase;
+}
+
+#menu #see-highscores {
+    color: #ecb621;
+    border: 2px solid #ecb621;
+    top: 65%;
 }
 
 #menu p {

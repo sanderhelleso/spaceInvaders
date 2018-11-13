@@ -3,6 +3,7 @@ window.onload = initMenu;
 // GLOBALS
 let gameWindow;             // main game window
 let gameMenu;               // main game menu
+let gameHighscores;         // main game highscores
 let enemyCont;              // enemy container
 let enemyPosY = 12;         // enemies position y
 let enemyPosX = 50          // enemies position X
@@ -21,10 +22,32 @@ let megaAvailable = false;  // mega combo
 let loop;                   // game loop
 let totalEnemiesKilled = 0; // total enemies killed
 
+function reset() {
+    score = 0;
+    level = 0;
+    dead = false;
+    lifes = 3;
+    megaAvailable = false;
+    totalEnemiesKilled = 0;
+}
+
 function initMenu() {
+    document.querySelector('#see-highscores').addEventListener('click', seeHighscores);
+    document.querySelector('#back-to-menu').addEventListener('click', backToMenu);
     document.querySelector('#start-game').addEventListener('click', startGame);
     gameWindow = document.querySelector('#game-window');
     gameMenu = document.querySelector('#menu');
+    gameHighscores = document.querySelector('#highscores');
+}
+
+function backToMenu() {
+    gameHighscores.style.display = 'none';
+    gameMenu.style.display = 'block';
+}
+
+function seeHighscores() {
+    gameMenu.style.display = 'none';
+    gameHighscores.style.display = 'block';
 }
 
 function startGame() {
@@ -36,8 +59,6 @@ function startGame() {
     startLevel();
     gameLoop();
 }
-
-
 
 function gameLoop() {
     loop = setInterval(() => {
@@ -124,6 +145,7 @@ function shoot(megaPos) {
         bullet.style.left = `${(posX + 5)}%`;
     }
 
+    playSound('shoot');
     gameWindow.appendChild(bullet);
 
     const moveBullet = setInterval(() => {
@@ -196,6 +218,9 @@ function createEnemy(enemyIndex) {
     setTimeout(() => {
         enemy.className = 'enemy spawned-enemy';
     }, 1000);
+    setTimeout(() => {
+        playSound('enemy');
+    }, 500);
     
     enemyCont.appendChild(enemy);
 }
@@ -228,6 +253,7 @@ function hitPlayer() {
 function removeLife() {
     lifes--;
     score -= 1000;
+    playSound('explosion');
 
     Array.from(document.querySelectorAll('.life'))
     .reverse()[0].className = 'life animated bounceOut';
@@ -249,6 +275,7 @@ function gameOver() {
     console.log('GAME OVER');
     clearInterval(loop);
     clearEnemies();
+    seeHighscores();
 }
 
 function updateStats() {
@@ -302,9 +329,23 @@ function showMegaCombo() {
 }
 
 function removeEnemy(enemy) {
+    playSound('invaderkilled');
     enemy.style.opacity = '0';
     enemiesKilled++;
     totalEnemiesKilled++;
     score += 100;
     updateStats();
+}
+
+function playSound(sound) {
+    const audio = document.createElement('audio');
+    audio.src = `../public/assets/sounds/${sound}.wav`;
+    audio.style.display = 'none';
+    document.body.appendChild(audio);
+
+    audio.volume = '0.3';
+    audio.play();
+    setTimeout(() => {
+        document.body.removeChild(audio);
+    }, 1000);
 }

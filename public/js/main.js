@@ -19,6 +19,7 @@ let dead = false;           // player lost round
 let lifes = 3;              // users total lifes
 let megaAvailable = false;  // mega combo
 let loop;                   // game loop
+let totalEnemiesKilled = 0; // total enemies killed
 
 function initMenu() {
     document.querySelector('#start-game').addEventListener('click', startGame);
@@ -303,6 +304,7 @@ function showMegaCombo() {
 function removeEnemy(enemy) {
     enemy.style.opacity = '0';
     enemiesKilled++;
+    totalEnemiesKilled++;
     score += 100;
     updateStats();
 }

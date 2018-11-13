@@ -24,6 +24,7 @@ let loop;                   // game loop
 let totalEnemiesKilled = 0; // total enemies killed
 let userName;               // username of game
 let saveGame;               // save game button
+let highscore;              // highscore data
 
 function reset() {
     score = 0;
@@ -45,7 +46,7 @@ function initMenu() {
     gameHighscores = document.querySelector('#highscores');
     gameOverScreen = document.querySelector('#game-over');
     saveGame = document.querySelector('#back-to-menu-game-over');
-    saveGame.addEventListener('click', seeHighscores);
+    saveGame.addEventListener('click', writeHighScore);
 }
 
 function validateName(e) {
@@ -73,17 +74,11 @@ function backToMenu() {
 
 function seeHighscores() {
 
-    $.getJSON( "../public/highscores/highscores.json", function( data ) {
-        var items = [];
-        $.each( data, function( key, val ) {
-            items.push( "<li id='" + key + "'>" + val + "</li>" );
-        });
-         
-        $( "<ul/>", {
-            "class": "my-new-list",
-            html: items.join( "" )
-        }).appendTo( "#highscores" );
+    Array.from(document.querySelectorAll('.highscore-list')).forEach(list => {
+        gameHighscores.removeChild(list);
     });
+
+    readHighscores();
 
     gameMenu.style.display = 'none';
     gameOverScreen.style.display = 'none';
@@ -387,4 +382,65 @@ function playSound(sound) {
     setTimeout(() => {
         document.body.removeChild(audio);
     }, 1000);
+}
+
+async function writeHighScore() {
+    const scores = await getHighscores();
+    const playerScore = {
+        [Object.keys(scores).length]: {
+            "name": document.querySelector('input').value,
+            "score": score,
+            "level": level,
+            "date": new Date().toJSON().slice(0,10).replace(/-/g,'/')
+        }
+    };
+
+    console.log(playerScore);
+    seeHighscores();
+
+    /*$.ajax
+    ({
+        type: 'POST',
+        dataType : 'json',
+        async: false,
+        url: '../public/highscores/highscores.json',
+        data: { data: JSON.stringify({highscore}) },
+        success: function () {alert("Thanks!"); },
+        failure: function() {alert("Error!");}
+    });*/
+}
+
+async function readHighscores() {
+    const scores = [];
+    const scoresData = await getHighscores();
+    $.each(scoresData, (key, val) => {
+        scores.push
+        (
+            `<li id=${key}
+                value=${val.score}
+            >
+            <span>${val.name}</span> 
+            <span>${val.score}</span> 
+            <span>${val.level}</span> 
+            <span>${val.date}</span>
+            </li>`
+        );
+    });
+
+    // sort splitted string (jQuery ugh)
+    scores.sort((a, b) => { 
+        return b.split('value=')[1].split('>')[0] - a.split('value=')[1].split('>')[0]
+    });
+
+    $(
+        '<ul/>', {
+        'class': 'highscore-list',
+        html: scores.join("") })
+        .appendTo( '#highscores'
+    );
+}
+
+async function getHighscores() {
+    const response = await $.getJSON( "../public/highscores/highscores.json");
+    return response;
 }

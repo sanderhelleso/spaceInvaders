@@ -123,17 +123,45 @@ body {
 
 #highscores ul {
     position: absolute;
-    top: 42.5%;
+    top: 55%;
     left: 50%;
     transform: translate(-50%);
     list-style: none;
     padding: 0;
+    min-width: 90%;
 }
 
 #highscores ul li {
-    margin: 20px 0;
+    margin: 10px 0;
     font-size: 20px;
     font-family: 'Londrina Solid', cursive;
+    text-align: left;
+    float: left;
+    width: 100%;
+    padding-bottom: 1rem;
+    border-bottom: #9e9e9e;
+    height: 20px;
+    color: #9e9e9e;
+}
+
+#highscores #highscore-heading {
+    top: 42.5%;
+}
+
+#highscores #highscore-heading li {
+    color: #ffffff !important;
+    opacity: 1;
+    padding-bottom: 20px;
+    border-bottom: 2px solid #38ef7d;
+}
+
+#highscores ul li span {
+    margin-left: 2px;
+    min-width: 130px;
+    max-width: 130px;
+    text-align: left;
+    display: inline-block;
+    word-break: break-all;
 }
 
 #menu #see-highscores {

@@ -1,5 +1,20 @@
 {
-    "one": "Singular sensation",
-    "two": "Beady little eyes",
-    "three": "Little birds pitch by my doorstep"
-  }
+    "0": {
+        "name": "Sander",
+        "score": "1",
+        "level": "5",
+        "date": "12.11.2018"
+    },
+    "1": {
+        "name": "David",
+        "score": "30",
+        "level": "5",
+        "date": "12.11.2018"
+    },
+    "2": {
+        "name": "Jason",
+        "score": "2",
+        "level": "5",
+        "date": "12.11.2018"
+    }
+}

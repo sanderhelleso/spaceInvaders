@@ -18,6 +18,7 @@ let level = 0               // current game level
 let dead = false;           // player lost round
 let lifes = 3;              // users total lifes
 let megaAvailable = false;  // mega combo
+let loop;                   // game loop
 
 function initMenu() {
     document.querySelector('#start-game').addEventListener('click', startGame);
@@ -38,7 +39,7 @@ function startGame() {
 
 
 function gameLoop() {
-    setInterval(() => {
+    loop = setInterval(() => {
         updateScore();
         moveBg();
     }, 100);
@@ -49,7 +50,6 @@ function updateScore() {
     score += 5;
     document.querySelector('#score').innerHTML = `Score: ${score}`;
     if (score >= 3000 && score % 1000 === 0) {
-        console.log('MEGA READY');
         showMegaCombo();
         megaAvailable = true;
     }
@@ -228,30 +228,33 @@ function removeLife() {
     lifes--;
     score -= 1000;
 
-    console.log(lifes);
+    Array.from(document.querySelectorAll('.life'))
+    .reverse()[0].className = 'life animated bounceOut';
+    setTimeout(() => {
+        document.querySelector('#life')
+        .removeChild(Array.from(document.querySelectorAll('.life'))
+        .reverse()[0]);
+    }, 1000);
+
     if (lifes === 0) {
         gameOver();
         return;
     }
 
-    Array.from(document.querySelectorAll('.life')).reverse()[0].className = 'life animated bounceOut';
-    setTimeout(() => {
-        document.querySelector('#life').removeChild(Array.from(document.querySelectorAll('.life')).reverse()[0]);
-    }, 1000);
     updateStats();
 }
 
 function gameOver() {
     console.log('GAME OVER');
+    clearInterval(loop);
+    clearEnemies();
 }
 
 function updateStats() {
     document.querySelector('#stats').innerHTML = `Enemies Killed: ${enemiesKilled}/${enemies}`;
 
     if (enemiesKilled === enemies || dead) {
-        Array.from(document.querySelectorAll('.enemy')).forEach((enemy) => {
-            enemyCont.removeChild(enemy);
-        });
+        clearEnemies();
         
         dead = false;
         enemyPosY = 12;
@@ -264,6 +267,12 @@ function updateStats() {
             startLevel();
         }, 1000);
     }
+}
+
+function clearEnemies() {
+    Array.from(document.querySelectorAll('.enemy')).forEach((enemy) => {
+        enemyCont.removeChild(enemy);
+    });
 }
 
 function showLevelAnnouncement() {

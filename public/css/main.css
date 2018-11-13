@@ -2,7 +2,10 @@
 
 body {
     overflow: hidden;
-    animation: animateBg 60s infinite linear;
+    background: linear-gradient(
+    rgba(23, 8, 37, 0.8), 
+    rgba(28, 255, 160, 0.8)),
+    url("../assets/ui/arcade.jpg");
     background-size: cover;
 	background-repeat: no-repeat;
     background-attachment: fixed;
@@ -39,6 +42,37 @@ body {
     transform: translate(-50%);
     text-shadow: 2px 2px 5px rgb(255, 115, 0);
     letter-spacing: 5px;
+    text-transform: uppercase;
+}
+
+#menu button {
+    font-family: 'Orbitron', sans-serif;
+    position: absolute;
+    top: 55%;
+    left: 50%;
+    transform: translate(-50%);
+    background: transparent;
+    border: 2px solid #38ef7d;
+    padding: 1rem;
+    min-width: 225px;
+    color: #38ef7d;
+    font-size: 18px;
+    letter-spacing: 3px;
+    cursor: pointer;
+    text-transform: uppercase;
+}
+
+#menu p {
+    position: absolute;
+    bottom: 2%;
+    left: 50%;
+    transform: translate(-50%);
+    color: white;
+    font-size: 10px;
+    font-family: 'Orbitron', sans-serif;
+    opacity: 0.5;
+    letter-spacing: 1px;
+    min-width: 100%;
 }
 
 
@@ -193,58 +227,10 @@ body {
     text-shadow: 2px 2px 5px rgb(255, 115, 0);
 }
 
-@keyframes spin {
-    from {transform:rotate(0deg);}
-    to {transform:rotate(360deg);}
-}
-
 @keyframes move {
     0% {transform:rotate(0deg);}
     25% {transform:rotate(20deg);}
     50% {transform:rotate(0deg);}
     75% {transform:rotate(-20deg);}
     100% {transform:rotate(0deg);}
-}
-
-@keyframes animateBg {
-    0% {background: linear-gradient(
-        rgba(100, 47, 153, 0.8), 
-        rgba(115, 56, 182, 0.8)),
-        url("../assets/ui/arcade.jpg");
-        background-size: cover;
-        background-repeat: no-repeat;
-        background-attachment: fixed;
-    }
-    25% {background: linear-gradient(
-        rgba(47, 105, 153, 0.8), 
-        rgba(6, 226, 255, 0.8)),
-        url("../assets/ui/arcade.jpg");
-        background-size: cover;
-        background-repeat: no-repeat;
-        background-attachment: fixed;
-    }
-    50% {background: linear-gradient(
-        rgba(236, 143, 66, 0.8), 
-        rgba(208, 211, 45, 0.8)),
-        url("../assets/ui/arcade.jpg");
-        background-size: cover;
-        background-repeat: no-repeat;
-        background-attachment: fixed;
-    }
-    75% {background: linear-gradient(
-        rgba(255, 46, 46, 0.8), 
-        rgba(235, 85, 85, 0.8)),
-        url("../assets/ui/arcade.jpg");
-        background-size: cover;
-        background-repeat: no-repeat;
-        background-attachment: fixed;
-    }
-    100% {background: linear-gradient(
-        rgba(100, 47, 153, 0.8), 
-        rgba(115, 56, 182, 0.8)),
-        url("../assets/ui/arcade.jpg");
-        background-size: cover;
-        background-repeat: no-repeat;
-        background-attachment: fixed;
-    }
 }

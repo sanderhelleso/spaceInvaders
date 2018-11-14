@@ -6,7 +6,7 @@ Web version of Space Invaders with my own little twist - Space Invaders is one o
 [Play Game](http://sander-hellesoe-cst-336.herokuapp.com/hw/spaceInvaders/)
 
 ## Demo
-<img src="https://github.com/sanderhelleso/spaceInvaders/blob/master/demo/spaceInvaders.gif" alt="demo of game" />
+<img src="https://github.com/sanderhelleso/spaceInvaders/blob/master/demo/spaceInvaders.gif" alt="demo of game" width=400 height=400/>
 
 
 ## Built With

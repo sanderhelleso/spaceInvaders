@@ -1,6 +1,6 @@
 # spaceInvaders
 
-Web version of Space Invaders with my own little twist.
+Web version of Space Invaders with a twist
 <br>
 <br>
 [Play Game](http://sander-hellesoe-cst-336.herokuapp.com/hw/spaceInvaders/)
@@ -29,14 +29,10 @@ Round 1 - 18 spawn new aliens. After round 18 each wave will increase alien move
 ## Built With
 
 * JavaScript
-<br>
-<br>
 
 ## Authors
 
 * **Sander Hellesø**
-<br>
-<br>
 
 ## License
 

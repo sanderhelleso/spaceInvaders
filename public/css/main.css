@@ -28,6 +28,10 @@ body {
     border-bottom: 2px solid #38ef7d;
 }
 
+#game-cont {
+    margin: 25vh auto;
+}
+
 #game-window, #menu, #highscores, #game-over {
     display: none;
     background: linear-gradient(
@@ -38,7 +42,7 @@ body {
     height: 600px;
     width: 600px;
     position: relative;
-    margin: 15vh auto;
+    margin: 0 auto;
     -webkit-box-shadow: 0 24px 38px 3px rgba(0,0,0,0.14), 0 9px 46px 8px rgba(0,0,0,0.12), 0 11px 15px -7px rgba(0,0,0,0.2);
     box-shadow: 0 24px 38px 3px rgba(0,0,0,0.14), 0 9px 46px 8px rgba(0,0,0,0.12), 0 11px 15px -7px rgba(0,0,0,0.2);
     border-radius: 12px;
@@ -50,7 +54,7 @@ body {
     text-align: center;
 }
 
-#menu h1, #highscores h1, #game-over h1 {
+#menu h1, #highscores h1, #game-over h1, #unavailable {
     position: absolute;
     font-family: 'Orbitron', sans-serif;
     color: #833ab4;
@@ -61,6 +65,14 @@ body {
     text-shadow: 2px 2px 5px rgb(255, 115, 0);
     letter-spacing: 5px;
     text-transform: uppercase;
+}
+
+#unavailable {
+       top: 40%;
+       font-size: 27.5px;
+       width: 90%;
+       text-align: center;
+       color: #ffffff;
 }
 
 #menu button, #highscores button, #game-over button {
@@ -78,6 +90,7 @@ body {
     letter-spacing: 3px;
     cursor: pointer;
     text-transform: uppercase;
+    outline: none;
 }
 
 #game-over .disabled-btn {
@@ -157,8 +170,8 @@ body {
 
 #highscores ul li span {
     margin-left: 2px;
-    min-width: 130px;
-    max-width: 130px;
+    min-width: 125px;
+    max-width: 125px;
     text-align: left;
     display: inline-block;
     word-break: break-all;
@@ -197,15 +210,19 @@ body {
 
 #player-cont {
     position: absolute;
-    bottom: 10%;
+    bottom: 7.5%;
     animation: 0.3s transform;
     z-index: 1337;
+}
+
+#player-rotate {
+    transform: rotate(180deg);
 }
 
 #player {
     height: 70px;
     width: 70px;
-    transform: rotate(180deg);
+    animation: float 2s ease-in-out infinite;
 }
 
 #score-cont {
@@ -305,6 +322,12 @@ body {
     transition: 0.3s ease-in-out;
 }
 
+#boss {
+    height: 75px;
+    width: 150px;
+    margin: 0 auto;
+}
+
 .spawned-enemy {
     animation: move 3s infinite linear;
 }
@@ -342,6 +365,21 @@ body {
     50% {transform:rotate(0deg);}
     75% {transform:rotate(-20deg);}
     100% {transform:rotate(0deg);}
+}
+
+@keyframes float {
+	0% {
+		box-shadow: 0 5px 15px 0px rgba(0,0,0,0.6);
+		transform: translatey(10px);
+	}
+	50% {
+		box-shadow: 0 25px 15px 0px rgba(0,0,0,0.2);
+		transform: translatey(-10px);
+	}
+	100% {
+		box-shadow: 0 5px 15px 0px rgba(0,0,0,0.6);
+		transform: translatey(10px);
+	}
 }
 
 ::-webkit-scrollbar {

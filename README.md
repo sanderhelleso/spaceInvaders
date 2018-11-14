@@ -7,6 +7,14 @@ Web version of Space Invaders with my own little twist - Space Invaders is one o
 
 ## Demo
 <img src="https://github.com/sanderhelleso/spaceInvaders/blob/master/demo/spaceInvaders.gif" alt="demo of game" width=500 height=500/>
+<br>
+
+## How to play
+A key - move the spaceship (player) to the left
+
+D key - move the spaceship(player) to the right
+
+Space bar or Enter Key - Shoot
 
 
 ## Built With

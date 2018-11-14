@@ -14,6 +14,8 @@ A key - move the spaceship (player) to the left
 D key - move the spaceship (player) to the right
 
 Space bar or Enter Key - Shoot
+<br>
+<br>
 
 ## Goal
 The aim is to defeat waves of aliens with a laser to earn as many points as possible
@@ -21,14 +23,20 @@ The aim is to defeat waves of aliens with a laser to earn as many points as poss
 The player starts with 3 lifes and lose a life if the player is either hit by an alien or the alien reaches the end og space
 
 Round 1 - 18 spawn new aliens. After round 18 each wave will increase alien movement speed and distance.
+<br>
+<br>
 
 ## Built With
 
 * JavaScript
+<br>
+<br>
 
 ## Authors
 
 * **Sander Hellesø**
+<br>
+<br>
 
 ## License
 

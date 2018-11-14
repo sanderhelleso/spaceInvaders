@@ -1,6 +1,6 @@
 # spaceInvaders
 
-Web version of Space Invaders with my own little twist - Space Invaders is one of the earliest shooting games; the aim is to defeat waves of aliens with a laser to earn as many points as possible.
+Web version of Space Invaders with my own little twist.
 <br>
 <br>
 [Play Game](http://sander-hellesoe-cst-336.herokuapp.com/hw/spaceInvaders/)
@@ -11,10 +11,16 @@ Web version of Space Invaders with my own little twist - Space Invaders is one o
 ## How to play
 A key - move the spaceship (player) to the left
 
-D key - move the spaceship(player) to the right
+D key - move the spaceship (player) to the right
 
 Space bar or Enter Key - Shoot
 
+## Goal
+The aim is to defeat waves of aliens with a laser to earn as many points as possible
+
+The player starts with 3 lifes and lose a life if the player is either hit by an alien or the alien reaches the end og space
+
+Round 1 - 18 spawn new aliens. After round 18 each wave will increase alien movement speed and distance.
 
 ## Built With
 

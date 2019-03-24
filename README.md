@@ -1,6 +1,6 @@
 # spaceInvaders
 
-Web version of Space Invaders with a twist
+👾 A modern web version of Space Invaders with a twist
 <br>
 <br>
 [Play Game](http://sander-hellesoe-cst-336.herokuapp.com/hw/spaceInvaders/)
